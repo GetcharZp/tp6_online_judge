@@ -1,0 +1,46 @@
+{include file="common/header"}
+<div style="padding: 20px; background-color: #F2F2F2;">
+    <div class="layui-row">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">状态列表：</div>
+                <div class="layui-card-body">
+                    <table class="layui-table" lay-even="" lay-skin="nob">
+                        <thead>
+                        <tr>
+                            <th>用户名</th>
+                            <th>问题ID</th>
+                            <th>问题标题</th>
+                            <th>状态</th>
+                            <th>创建时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach $statuss as $status}
+                        <tr>
+                            <td>{$status.username}</td>
+                            <td>{$status.pid}</td>
+                            <td>{$status.title}</td>
+                            <td>
+                                {if $status.status == 0}
+                                <span class="layui-badge layui-bg-blue">判断中</span>
+                                {elseif $status.status == 1 /}
+                                <span class="layui-badge layui-bg-cyan">正确</span>
+                                {elseif $status.status == 2 /}
+                                <span class="layui-badge layui-bg-red">错误</span>
+                                {elseif $status.status == 3 /}
+                                <span class="layui-badge layui-bg-red">超时</span>
+                                {/if}
+                            </td>
+                            <td>{$status.create_time|date="Y-m-d H:i:s"}</td>
+                        </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                    {$statuss|raw|zp_page}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="common/footer"}

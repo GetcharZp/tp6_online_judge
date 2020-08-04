@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <title>Title</title>
+</head>
+<body>
+<div class="layui-card">
+    <div class="layui-card-header">
+        请输入待提交的代码(仅支持PHP语言)：
+    </div>
+    <div class="layui-card-body">
+        <textarea placeholder="请输入内容" class="layui-textarea code" name="" id="" cols="30" rows="10"></textarea>
+    </div>
+    <div class="layui-card-header" style="padding-bottom: 10px">
+        <button class="layui-btn code-submit">提交</button>
+    </div>
+</div>
+<script src="/static/layui/layui.js"></script>
+<script>
+    layui.use('layer', function () {
+        layer = layui.layer;
+        $ = layui.jquery;
+
+        $('.code-submit').click(function () {
+            uid = "{:session('username')['id']}";
+            code = $('.code').val();
+            pid = "{:input('get.pid')}";
+
+            if (uid == undefined || uid == null || uid == "") {
+                layer.msg('请先登录');
+                return false;
+            }
+            if (code == undefined || code == null || code == "") {
+                layer.msg('请输入待提交的代码');
+                return false;
+            }
+            if (pid == undefined || pid == null || pid == "") {
+                layer.msg('请正确访问改网站');
+                return false;
+            }
+            $.post("{:url('index/problem/detail_submit')}", {pid: pid, code: code}, function (res) {
+                if (res.code === 200) {
+                    layer.msg(res.msg, {time: 2000}, function () {
+                        window.parent.location.reload();
+                    })
+                } else {
+                    layer.msg(res.msg);
+                }
+            }, 'json');
+            return false;
+        });
+    })
+</script>
+</body>
+</html>

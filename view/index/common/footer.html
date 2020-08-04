@@ -1,0 +1,45 @@
+<div class="layui-row layui-bg-cyan">
+    <div class="layui-col-xs12" style="text-align: center; line-height: 40px;">
+        © GetcharZp {:date("Y", time())}
+    </div>
+</div>
+<script>
+    layui.use('element', function(){
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+
+        //监听导航点击
+        element.on('nav(demo)', function(elem){
+            //console.log(elem)
+            layer.msg(elem.text());
+        });
+    });
+    layui.use('layer', function () {
+        var layer = layui.layer;
+        var $ = layui.jquery;
+
+        // login
+        $('.login').click(function () {
+            layer.open({
+                type: 2,
+                title: "登录",
+                skin: 'layui-layer-rim', //加上边框
+                area: ['420px', '240px'], //宽高
+                content: '{:url("index/index/login")}'
+            });
+            return false;
+        });
+
+        // register
+        $('.register').click(function () {
+            layer.open({
+                type: 2,
+                title: "注册",
+                skin: 'layui-layer-rim', //加上边框
+                area: ['420px', '400px'], //宽高
+                content: '{:url("index/index/register")}'
+            });
+            return false;
+        });
+    });
+</script>
+</html>

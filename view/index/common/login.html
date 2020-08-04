@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <style>
+        input {
+            margin-top: 15px;
+        }
+    </style>
+    <title>登录</title>
+</head>
+<body>
+<div clss="layui-row">
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <input type="text" placeholder="请输入用户名或邮箱" class="layui-input user_email">
+                <input type="password" placeholder="请输入密码" class="layui-input password">
+                <input type="submit" class="layui-btn login-submit" value="登录">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/static/layui/layui.js"></script>
+<script>
+    layui.use('layer', function () {
+        var layer = layui.layer;
+        var $ = layui.jquery;
+        $('.login-submit').click(function () {
+            user_email = $('.user_email').val();
+            password = $('.password').val();
+            if (user_email == undefined || user_email == null || user_email == "") {
+                layer.msg("用户名或邮箱不能为空");
+                return false;
+            }
+            if (password == undefined || password == null || password == "") {
+                layer.msg("密码不能为空");
+                return false;
+            }
+            $.post("{:url('index/index/login')}", {user_email:user_email, password: password}, function (res) {
+                if (res.code === 200) {
+                    layer.msg(res.msg, {time: 2000}, function () {
+                        window.parent.location.reload();
+                    })
+                } else {
+                    layer.msg(res.msg);
+                }
+            }, 'json');
+            return false;
+        })
+    })
+</script>
+</html>

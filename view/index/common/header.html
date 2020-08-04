@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <script src="/static/layui/layui.js"></script>
+    <style>
+        .zp-right {
+            float: right;
+        }
+        .pagination li {
+            float: left;
+        }
+    </style>
+    <title>在线练习系统 online judge </title>
+</head>
+<body>
+<ul class="layui-nav layui-bg-cyan">
+    <li class="layui-nav-item"><a href="{:url('index/index/index')}">首页</a></li>
+    <li class="layui-nav-item"><a href="{:url('index/problem/index')}">问题</a></li>
+    <li class="layui-nav-item"><a href="{:url('index/rank/index')}">排名</a></li>
+    <li class="layui-nav-item"><a href="{:url('index/judgeStatus/index')}">状态</a></li>
+    {if empty(session('username'))}
+    <li class="layui-nav-item zp-right register"><a href="">注册</a></li>
+    <li class="layui-nav-item zp-right login"><a href="">登录</a></li>
+    <li class="layui-nav-item zp-right" style="top: 11px;"><input type="text" class="layui-input"></li>
+    {else/}
+    <li class="layui-nav-item zp-right"><a href="{:url('index/index/exit')}">退出</a></li>
+    <li class="layui-nav-item zp-right"><a href="">{:session('username')['username']}</a></li>
+    <li class="layui-nav-item zp-right" style="top: 11px;"><input type="text" class="layui-input"></li>
+    {/if}
+</ul>
+</body>

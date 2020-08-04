@@ -1,0 +1,104 @@
+{include file="common/header"}
+<div style="padding: 20px; background-color: #F2F2F2;">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md9">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    {$problem.title}
+                </div>
+                <div class="layui-card-header">
+                    时间：<span class="layui-badge layui-bg-cyan">{$problem.max_time}</span>
+                    总解决数：<span class="layui-badge layui-bg-cyan">{$problem.right_num}</span>
+                    总提交数：<span class="layui-badge layui-bg-cyan">{$problem.total_num}</span>
+                    上传用户：<span class="layui-badge layui-bg-cyan">{$problem.username}</span>
+                </div>
+                <div class="layui-card-body" style="border-bottom: 1px solid #f6f6f6;">
+                    {$problem.content}
+                </div>
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        输入案例：
+                    </div>
+                    <div class="layui-card-body">
+                        {$cate.in}
+                    </div>
+                </div>
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        输出案例：
+                    </div>
+                    <div class="layui-card-body">
+                        {$cate.out}
+                    </div>
+                </div>
+                <div class="layui-card-header" style="padding-bottom: 15px;">
+                    <button class="layui-btn to-submit">提交</button>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">评论列表</div>
+                <div class="layui-card-body">
+                    {foreach $comments as $k=>$v}
+                    <div class="layui-card">
+                        <div class="layui-card-header">{$v.username}</div>
+                        <div class="layui-card-body">
+                            {$v.content}
+                        </div>
+                        <div class="layui-card-header">
+                            <span style="float: right;">{$v.create_time|date='Y-m-d H:i:s'}</span>
+                        </div>
+                    </div>
+                    {/foreach}
+                    <textarea placeholder="请输入您的评论" class="layui-textarea" name="" id="content" cols="30" rows="10"></textarea>
+                    <button class="layui-btn comment-submit" style="margin-top: 10px">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    layui.use('layer', function () {
+        var layer = layui.layer;
+        var $ = layui.jquery;
+
+        // 打开提交框
+        $('.to-submit').click(function () {
+            var pid = "{:input('get.id')}";
+            layer.open({
+                type: 2,
+                title: "提交",
+                skin: 'layui-layer-rim', //加上边框
+                area: ['420px', '380px'], //宽高
+                content: '{:url("index/problem/detail_submit")}' + '?pid=' + pid
+            });
+            return false;
+        });
+
+        // 提交评论
+        $('.comment-submit').click(function () {
+            uid = "{:session('username')['id']}";
+            pid = "{:input('get.id')}";
+            content = $('#content').val();
+            if (uid == undefined || uid == null || uid == "") {
+                layer.msg('请先登录');
+                return false;
+            }
+            if (content == undefined || content == null || content == "") {
+                layer.msg('情输入评论的内容');
+                return false;
+            }
+            $.post("{:url('index/problem/comment')}", {uid:uid, pid:pid, content:content}, function (res) {
+                if (res.code === 200) {
+                    layer.msg(res.msg, {time: 2000}, function () {
+                        window.location.reload();
+                    })
+                }
+            }, 'json');
+            return false;
+        });
+    });
+</script>
+{include file="common/footer"}

@@ -1,56 +1,18 @@
-ThinkPHP 6.0
+基于ThinkPHP 6.0、Redis、Layui的在线练习系统
 ===============
 
-> 运行环境要求PHP7.1+。
+> 该教程使用thinkphp6作为web端的后端开发框架，使用layui来布局页面的样式，通过redis来处理代码的判断流程，目前可以支持php代码的判断，可以参照B站的视频教程学习 
 
-[官方应用服务市场](https://www.thinkphp.cn/service) | [`ThinkPHP`开发者扶持计划](https://sites.thinkphp.cn/1782366)
+## 安装、配置
 
-ThinkPHPV6.0版本由[亿速云](https://www.yisu.com/)独家赞助发布。
+第一步、将 tp_gojc.sql 导入到你所使用的MySQL数据库中
 
-## 主要新特性
+第二步、需要在 config 目录中配置你的数据库以及调试信息
 
-* 采用`PHP7`强类型（严格模式）
-* 支持更多的`PSR`规范
-* 原生多应用支持
-* 更强大和易用的查询
-* 全新的事件系统
-* 模型事件和数据库事件统一纳入事件系统
-* 模板引擎分离出核心
-* 内部功能中间件化
-* SESSION/Cookie机制改进
-* 对Swoole以及协程支持改进
-* 对IDE更加友好
-* 统一和精简大量用法
+第三步、修改app\common.php 文件，替换成你的邮箱、密码
 
-## 安装
+第四步、配置 app 目录下面的三个 task 文件，具体操作可以按照视频来学习
 
-~~~
-composer create-project topthink/think tp 6.0.*
-~~~
+第五步、配置你的定时任务，参考视频
 
-如果需要更新框架使用
-~~~
-composer update topthink/framework
-~~~
-
-## 文档
-
-[完全开发手册](https://www.kancloud.cn/manual/thinkphp6_0/content)
-
-## 参与开发
-
-请参阅 [ThinkPHP 核心框架包](https://github.com/top-think/framework)。
-
-## 版权信息
-
-ThinkPHP遵循Apache2开源协议发布，并提供免费使用。
-
-本项目包含的第三方源码和二进制文件之版权信息另行标注。
-
-版权所有Copyright © 2006-2020 by ThinkPHP (http://thinkphp.cn)
-
-All rights reserved。
-
-ThinkPHP® 商标和著作权所有者为上海顶想信息科技有限公司。
-
-更多细节参阅 [LICENSE.txt](LICENSE.txt)
+第六步、将该代码部署到你的网站上就可以了哈

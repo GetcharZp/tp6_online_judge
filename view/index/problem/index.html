@@ -1,0 +1,42 @@
+{include file="common/header"}
+<div style="padding: 20px; background-color: #F2F2F2;">
+    <div class="layui-row">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">问题列表：</div>
+                <div class="layui-card-body">
+                    <table class="layui-table" lay-even="" lay-skin="nob">
+                        <thead>
+                        <tr>
+                            <th>状态</th>
+                            <th>ID</th>
+                            <th>标题</th>
+                            <th>分类</th>
+                            <th>正确率</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach $problems as $k=>$v}
+                        <tr>
+                            <td>
+                                {if isset($commit_set[$v['id']])}
+                                <img src="/static/img/success.png" alt="">
+                                {/if}
+                            </td>
+                            <td>{$v.id}</td>
+                            <td>
+                                <a href="{:url('index/problem/detail', ['id' => $v.id])}">{$v.title}</a>
+                            </td>
+                            <td>{$v.catename}</td>
+                            <td>{$v.right_num}/{$v.total_num}</td>
+                        </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                    {$problems|raw|zp_page}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="common/footer"}

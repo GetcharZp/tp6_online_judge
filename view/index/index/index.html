@@ -1,0 +1,46 @@
+{include file="common/header"}
+<div style="padding: 20px; background-color: #F2F2F2;">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md9">
+            {foreach $news as $k=>$v}
+            <div class="layui-card">
+                <div class="layui-card-header">{$v.title}</div>
+                <div class="layui-card-body">
+                    {$v.content|raw}
+                </div>
+                <div style="border-top: 1px solid #f6f6f6; line-height: 42px; text-align: right; margin-right: 20px;">
+                    <span class="layui-badge layui-bg-cyan">{$v.username}</span>
+                    <span>{$v.create_time|date='Y-m-d H:i:s'}</span>
+                </div>
+            </div>
+            {/foreach}
+        </div>
+        <div class="layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">用户排名</div>
+                <div class="layui-card-body">
+                    <table class="layui-table" lay-even="" lay-skin="nob">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>用户名</th>
+                            <th>正确个数</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach $ranks as $k=>$v}
+                        <tr>
+                            <td>{$k + 1}</td>
+                            <td>{$v.username}</td>
+                            <td>{$v.solve_num}</td>
+                        </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{include file="common/footer"}

@@ -1,0 +1,54 @@
+.layui-nav .search-right {
+	top: 10px;
+	float: right;
+}
+
+.layui-nav .login-right {
+	float: right;
+}
+
+.layui-nav .register-right {
+	float: right;
+}
+
+.layui-card-footer{
+	float: right;
+}
+
+.layui-table th{
+    font-size: 10px;
+}
+
+.layui-table td{
+    font-size: 10px;
+}
+
+.problem-tags {
+	float: right;
+}
+
+.layui-problem-submit {
+	float: right;
+	background-color: #393D49;
+}
+
+.layui-problem-comment {
+	font-size: 10px;
+}
+
+.login-register-color {
+	background-color: #393D49;
+}
+
+.public-footer {
+	opacity: .8;
+	text-align: center;
+	padding: 0 10px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.float-left {
+	float: left;
+}

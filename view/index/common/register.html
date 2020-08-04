@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <style>
+        input {
+            margin-top: 15px;
+        }
+    </style>
+    <title>注册</title>
+</head>
+<body>
+<div clss="layui-row">
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <input type="text" placeholder="请输入邮箱" class="layui-input email">
+                <input type="button" class="layui-btn get-code" value="获取验证码">
+                <input type="text" placeholder="请输入验证码" class="layui-input code">
+                <input type="text" placeholder="请输入用户名" class="layui-input username">
+                <input type="password" placeholder="请输入密码" class="layui-input password">
+                <input type="submit" class="layui-btn register-submit" value="注册">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/static/layui/layui.js"></script>
+<script>
+    layui.use('layer', function () {
+        var layer = layui.layer;
+        var $ = layui.jquery;
+
+        // 获取验证码
+        $('.get-code').click(function () {
+            email = $('.email').val();
+            if (email == undefined || email == null || email == "") {
+                layer.msg("邮箱不能为空");
+                return false;
+            }
+            $.post("{:url('index/index/register')}", {email:email, op:'get_code'}, function (res) {
+                layer.msg(res.msg);
+            }, 'json');
+            return false;
+        });
+
+        $('.register-submit').click(function () {
+            email = $('.email').val();
+            code = $('.code').val();
+            username = $('.username').val();
+            password = $('.password').val();
+
+            if (email == undefined || email == null || email == "") {
+                layer.msg("邮箱不能为空");
+                return false;
+            }
+            if (code == undefined || code == null || code == "") {
+                layer.msg("验证码不能为空");
+                return false;
+            }
+            if (username == undefined || username == null || username == "") {
+                layer.msg("用户名不能为空");
+                return false;
+            }
+            if (password == undefined || password == null || password == "") {
+                layer.msg("密码不能为空");
+                return false;
+            }
+            $.post("{:url('index/index/register')}", {email: email, code: code, username: username, password: password, op: 'register_submit'}, function (res) {
+                if (res.code === 200) {
+                    layer.msg(res.msg, {time: 2000}, function () {
+                        window.parent.location.reload();
+                    })
+                } else {
+                    layer.msg(res.msg);
+                }
+            }, 'json');
+            return false;
+        })
+    })
+</script>
+</html>

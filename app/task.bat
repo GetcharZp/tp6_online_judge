@@ -1,0 +1,1 @@
+D:\phpstudy_pro\Extensions\php\php7.3.4nts\php.exe -f E:\PhpstormProjects\github\tpgoj6\app\task.php

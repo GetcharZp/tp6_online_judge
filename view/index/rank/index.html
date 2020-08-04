@@ -1,0 +1,41 @@
+{include file="common/header"}
+<div style="padding: 20px; background-color: #F2F2F2;">
+    <div class="layui-row">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">排名列表：</div>
+                <div class="layui-card-body">
+                    <table class="layui-table" lay-even="" lay-skin="nob">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>用户名</th>
+                            <th>解题数</th>
+                            <th>提交数</th>
+                            <th>正确率</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach $users as $k=>$v}
+                        <tr>
+                            <td>{$v.id}</td>
+                            <td>{$v.username}</td>
+                            <td>{$v.solve_num}</td>
+                            <td>{$v.total_num}</td>
+                            <td>
+                                <?php
+                                    printf("%.2f", $v['solve_num'] / $v['total_num'] * 100);
+                                    echo "%"
+                                ?>
+                            </td>
+                        </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                    {$users|raw|zp_page}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="common/footer"}

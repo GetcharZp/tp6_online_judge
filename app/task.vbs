@@ -1,0 +1,1 @@
+CreateObject("WScript.Shell").Run "E:\PhpstormProjects\github\tpgoj6\app\task.bat",0
