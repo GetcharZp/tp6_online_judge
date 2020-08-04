@@ -1,7 +1,7 @@
 基于ThinkPHP 6.0、Redis、Layui的在线练习系统
 ===============
 
-> 该教程使用thinkphp6作为web端的后端开发框架，使用layui来布局页面的样式，通过redis来处理代码的判断流程，目前可以支持php代码的判断，可以参照B站的视频教程学习 
+> 该教程使用thinkphp6作为web端的后端开发框架，使用layui来布局页面的样式，通过redis来处理代码的判断流程，目前可以支持php代码的判断，可以参照B站的视频教程学习 https://www.bilibili.com/video/BV1ha4y1E76t/ 
 
 ## 安装、配置
 
